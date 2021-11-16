@@ -1,0 +1,6 @@
+all:
+  hosts:
+    localhost
+  vars:
+    version: "1.6"
+    eth1: "172.31.4.5"

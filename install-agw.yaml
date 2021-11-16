@@ -1,0 +1,14 @@
+- name: Install AGW
+  hosts: all
+  become: yes
+  tasks:
+    - name: Download AGW installation script
+      get_url:
+        url: "https://raw.githubusercontent.com/magma/magma/v{{ version }}/lte/gateway/deploy/agw_install_ubuntu.sh"
+        dest: /tmp/agw_install_ubuntu.sh
+        mode: '0755'
+    - name: replace eth1 in installation script
+      shell: sed -i '/address 10.0.2.1/c\  address {{ eth1 }}' agw_install_ubuntu.sh
+
+    - name: Execute the script 
+      script: /tmp/agw_install_ubuntu.sh
